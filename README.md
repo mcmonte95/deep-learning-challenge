@@ -19,11 +19,11 @@
      - [Approach and Model Architecture](#approach-and-model-architecture)
      - [Results](#results-3)
 5. [Conclusion](#conclusion)
-6. [Recommendations for Future Work](#recommendations-for-future-work)
+6. [References](#references)
 
 ## Project Overview
 
-This project aims to develop a tool for the nonprofit foundation Alphabet Soup to help select the applicants for funding with the best chance of success. Utilizing a dataset of over 34,000 organizations that have received funding, we aim to create a binary classifier that can predict the effectiveness of the funded projects.
+This project aims to develop a tool for the nonprofit foundation Alphabet Soup to help select the applicants for funding with the best chance of success. Utilizing a dataset of over 34,000 organizations that have received funding, I aim to create a binary classifier that can predict the effectiveness of the funded projects.
 
 ## Data Preprocessing
 
@@ -124,13 +124,14 @@ The application of PCA and the subsequent network design did not yield the expec
 
 ## Conclusion
 
-(TODO: Summarize findings and overall project outcomes)
+Throughout the course of this project, I explored several iterations of neural network models in an attempt to optimize the prediction accuracy for the effective use of funds by organizations funded by Alphabet Soup. Starting with a relatively simpler initial model and progressively introducing complexity through additional layers and dimensionality reduction techniques like PCA, I aimed to enhance the model's predictive capabilities. Surprisingly, the initial, less complex model demonstrated the best performance among the iterations tested. This finding underscores a crucial aspect of model development: more complexity does not necessarily equate to improved performance, especially when the underlying feature set does not support such complexity.
 
-## Recommendations for Future Work
+The attempts to improve the model through added layers and PCA did not yield the desired improvements in performance. Instead, these approaches resulted in either marginal improvements or, in the case of PCA, a significant reduction in model accuracy. This suggests that the initial features, though processed and categorized for simplicity, may have been overly simplified, causing a loss of valuable information critical for making accurate predictions.
 
-(TODO: Provide recommendations for improving the model or exploring new models)
+### Recommendations for Future Work
 
-
+Based on the outcomes of the various models tested, a recommendation for future attempts at solving this classification problem would be to revisit the preprocessing steps, particularly the handling of categorical variables. The aggregation of rare categories into a single "Other" category, while useful for simplification, may have inadvertently obscured meaningful patterns within the data. Re-evaluating these categories to see if they can be preserved or processed differently could provide the model with a richer feature set that more accurately captures the nuances of the data.
 
 ## References
-https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback
+- (1) Callback function documentation - https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/Callback 
+
