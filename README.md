@@ -1,14 +1,13 @@
-# Alphabet Soup Charity Funding Predictor
-
 ## Table of Contents
 
-1. [Project Overview](#project-overview)
-2. [Data Preprocessing](#data-preprocessing)
-3. [Initial Model Design](#initial-model-design)
+1. [Repository Guide](#repository-guide)
+2. [Project Overview](#project-overview)
+3. [Data Preprocessing](#data-preprocessing)
+4. [Initial Model Design](#initial-model-design)
    - [Model 1: Initial Neural Network](#model-1-initial-neural-network)
      - [Model Architecture and Training](#model-architecture-and-training)
      - [Results](#results)
-4. [Model Optimization Attempts](#model-optimization-attempts)
+5. [Model Optimization Attempts](#model-optimization-attempts)
    - [Model 2: Optimized Neural Network I](#model-2-optimized-neural-network-i)
      - [Model Architecture and Training](#model-architecture-and-training-1)
      - [Results](#results-1)
@@ -18,8 +17,16 @@
    - [Model 4: Optimized Neural Network III](#model-4-optimized-neural-network-iii)
      - [Approach and Model Architecture](#approach-and-model-architecture)
      - [Results](#results-3)
-5. [Conclusion](#conclusion)
-6. [References](#references)
+6. [Conclusion](#conclusion)
+7. [References](#references)
+
+## Repository Guide
+
+This repository is structured to facilitate easy navigation and understanding of the Alphabet Soup Charity Funding Predictor project. It contains the following main components:
+
+- **Initial Neural Network Folder**: This folder houses the Jupyter notebook used for data preprocessing, a subfolder for model checkpoints saved every 5 epochs during training, and the `AlphabetSoupCharity.h5` file, which contains the saved initial model.
+
+- **Optimized Neural Network Folder**: This folder includes the Jupyter notebook detailing three optimization attempts of the neural network model. It also contains three subfolders, each holding the model checkpoints for one of the three optimized models. The `AlphabetSoupCharity_Optimization.h5` file within this folder stores the "best-performing" optimized model.
 
 ## Project Overview
 
