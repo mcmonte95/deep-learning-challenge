@@ -4,17 +4,22 @@
 
 1. [Project Overview](#project-overview)
 2. [Data Preprocessing](#data-preprocessing)
-3. [Model 1: Initial Neural Network](#model-1-initial-neural-network)
-   - [Model Architecture and Training](#model-architecture-and-training)
-   - [Results](#results)
-4. [Model 2: Optimized Neural Network I](#model-2-optimized-neural-network-i)
-   - [Model Architecture and Training](#model-architecture-and-training-1)
-   - [Results](#results-1)
-5. [Model 3: Optimized Neural Network II](#model-3-optimized-neural-network-ii)
-   - [Model Architecture and Training](#model-architecture-and-training-2)
-   - [Results](#results-2)
-6. [Conclusion](#conclusion)
-7. [Recommendations for Future Work](#recommendations-for-future-work)
+3. [Initial Model Design](#initial-model-design)
+   - [Model 1: Initial Neural Network](#model-1-initial-neural-network)
+     - [Model Architecture and Training](#model-architecture-and-training)
+     - [Results](#results)
+4. [Model Optimization Attempts](#model-optimization-attempts)
+   - [Model 2: Optimized Neural Network I](#model-2-optimized-neural-network-i)
+     - [Model Architecture and Training](#model-architecture-and-training-1)
+     - [Results](#results-1)
+   - [Model 3: Optimized Neural Network II](#model-3-optimized-neural-network-ii)
+     - [Model Architecture and Training](#model-architecture-and-training-2)
+     - [Results](#results-2)
+   - [Model 4: Optimized Neural Network III](#model-4-optimized-neural-network-iii)
+     - [Approach and Model Architecture](#approach-and-model-architecture)
+     - [Results](#results-3)
+5. [Conclusion](#conclusion)
+6. [Recommendations for Future Work](#recommendations-for-future-work)
 
 ## Project Overview
 
@@ -29,9 +34,11 @@ The dataset includes metadata about each organization, such as application type,
 - Splitting the data into feature and target arrays, followed by train-test splitting.
 - Scaling the feature datasets.
 
-## Model 1: Initial Neural Network
+## Initial Model Design
 
-### Model Architecture and Training
+### Model 1: Initial Neural Network
+
+#### Model Architecture and Training
 
 - Input features: 43
 - First hidden layer: 80 neurons, ReLU activation.
@@ -41,39 +48,59 @@ The dataset includes metadata about each organization, such as application type,
 - Implemented a custom callback to save model weights every 5 epochs.
 - Trained for 100 epochs, resulting in a loss of 0.5619 and an accuracy of 72.49%.
 
-### Results
+#### Results
 
 The initial model demonstrated an accuracy of approximately 72.49%, indicating potential for further optimization to meet the target accuracy of over 75%.
 
-## Model 2: Optimized Neural Network I
+## Model Optimization Attempts
 
-### Model Architecture and Training
+### Model 2: Optimized Neural Network I
 
-- (Include details from the code provided earlier as this model's architecture and training process)
+#### Model Architecture and Training
 
-### Results
+- Input features: 43
+- First hidden layer: 256 neurons, ReLU activation. (Increased from 80 in the initial model)
+- Second hidden layer: 128 neurons, ReLU activation. (Increased from 30 in the initial model)
+- Output layer: 1 neuron, Sigmoid activation. (Unchanged)
+- Compiled with binary crossentropy loss, Adam optimizer, and accuracy as the metric. (Unchanged)
+- The model was trained for 100 epochs with a custom callback to save the model's weights every 5 epochs. (Unchanged)
 
-(TODO: Add results once provided)
+#### Results
 
-## Model 3: Optimized Neural Network II
+After training, the model achieved a loss of 0.5772 and an accuracy of 72.38% on the test data. This represents a slight decrease in performance compared to the initial model, which had a slightly lower loss of 0.5619 and a marginally higher accuracy of 72.49%. The changes in the neural network's architecture, specifically the increase in neurons in the hidden layers, did not lead to the expected improvement in model performance.
 
-### Model Architecture and Training
+### Model 3: Optimized Neural Network II
 
-(TODO: Add details once provided)
+#### Model Architecture and Training
 
-### Results
+- Input features: 43
+- First hidden layer: 256 neurons, ReLU activation. (Unchanged from Model 2)
+- Second hidden layer: 128 neurons, ReLU activation. (Unchanged from Model 2)
+- Third hidden layer: 64 neurons, ReLU activation. (An additional layer compared to Model 2)
+- Output layer: 1 neuron, Sigmoid activation. (Unchanged)
+- The model was compiled with binary crossentropy loss, Adam optimizer, and accuracy as the metric. (Unchanged)
+- The model was trained for 100 epochs with a custom callback to save the model's weights every 5 epochs. (Unchanged)
 
-(TODO: Add results once provided)
+#### Results
 
-## Model 4: Optimized Neural Network III
+This model iteration resulted in a loss of 0.6028 and an accuracy of 72.49% on the test data. Compared to Model 2, which had a slightly lower loss (0.5772) but the same accuracy (72.38%), adding an additional hidden layer with 64 neurons did not significantly improve performance. The slight increase in loss suggests that simply adding more layers without adjusting other parameters may not yield better results.
 
-### Model Architecture and Training
+### Model 4: Optimized Neural Network III
 
-(TODO: Add details once provided)
+#### Approach and Model Architecture
 
-### Results
+- PCA was applied to the scaled feature data, reducing the number of input features to 32 from the original 43, while retaining approximately 98.08% of the variance in the dataset.
+- Input features after PCA: 32
+- First hidden layer: 128 neurons, ReLU activation.
+- Second hidden layer: 64 neurons, ReLU activation.
+- Third hidden layer: 32 neurons, tanh activation. (Introduced a different activation function)
+- Output layer: 1 neuron, Sigmoid activation.
+- The model was compiled with binary crossentropy loss, Adam optimizer, and accuracy as the metric.
+- The model was trained for 100 epochs with a custom callback to save the model's weights every 5 epochs. (Unchanged)
 
-(TODO: Add results once provided)
+#### Results
+
+After applying PCA and reconfiguring the neural network, the model achieved a loss of 0.8329 and an accuracy of 52.97% on the test data. This represents a significant decrease in performance compared to the previous models. The results indicate that while PCA can be a powerful tool for dimensionality reduction and can help in simplifying the input data, in this case, it led to a loss of critical information necessary for the neural network to achieve high accuracy.
 
 ## Conclusion
 
