@@ -27,12 +27,31 @@ This project aims to develop a tool for the nonprofit foundation Alphabet Soup t
 
 ## Data Preprocessing
 
-The dataset includes metadata about each organization, such as application type, affiliation, classification, and the amount of funding requested. The preprocessing steps involved:
-- Dropping unnecessary identification columns.
-- Determining unique values and binning rare categorical variables.
-- Encoding categorical variables using `pd.get_dummies()`.
-- Splitting the data into feature and target arrays, followed by train-test splitting.
-- Scaling the feature datasets.
+The dataset provided by Alphabet Soup contains various metadata about organizations that have received funding. To prepare the data for the neural network model, several preprocessing steps were undertaken to ensure the dataset was suitable for training and prediction. Here are the specific steps taken:
+
+### Dropping Unnecessary Identification Columns
+
+The first step in preprocessing involved removing columns that were not useful for the model. Specifically, the columns `EIN` (Employer Identification Number) and `NAME` (Name of the organization) were dropped. These columns are identifiers that do not contribute to the predictive capability of the model.
+
+### Determining Unique Values and Binning Rare Categorical Variables
+
+The dataset contains several categorical variables with a wide range of values. To simplify the model and improve its performance, rare categorical variables were binned into a single category named "Other". This was applied to the `APPLICATION_TYPE` and `CLASSIFICATION` columns. This process helps in reducing the dimensionality and focusing the model on more common occurrences.
+
+### Encoding Categorical Variables
+
+After simplifying the categorical variables, the next step was to encode these variables using `pd.get_dummies()`. The encoding was applied to all categorical columns, including `APPLICATION_TYPE`, `AFFILIATION`, `CLASSIFICATION`, `USE_CASE`, `ORGANIZATION`, `INCOME_AMT`, and `SPECIAL_CONSIDERATIONS`, turning them into numerical data suitable for the neural network.
+
+### Splitting the Data into Feature and Target Arrays
+
+The target variable for our model is `IS_SUCCESSFUL`, which indicates whether the money given to an organization was used effectively. All other columns after encoding and preprocessing were used as features for the model. Thus, the dataset was split into two arrays: `X` for the features and `y` for the target (`IS_SUCCESSFUL`).
+
+### Train-Test Splitting
+
+The preprocessed data was then split into training and testing datasets to evaluate the model's performance. I used the `train_test_split` function from scikit-learn.
+
+### Scaling the Feature Datasets
+
+Finally, the feature data was scaled using `StandardScaler` from scikit-learn. Scaling ensures that the neural network model does not get biased by the scale of the features. 
 
 ## Initial Model Design
 
