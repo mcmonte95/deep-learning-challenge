@@ -71,55 +71,56 @@ Finally, the feature data was scaled using `StandardScaler` from scikit-learn. S
 
 The initial model demonstrated an accuracy of approximately 72.49%, indicating potential for further optimization to meet the target accuracy of over 75%.
 
-## Model Optimization Attempts
-
 ### Model 2: Optimized Neural Network I
 
 #### Model Architecture and Training
 
+The architecture for this optimized model was designed with a strategy focused on enhancing the model's ability to capture complex patterns by significantly increasing the number of neurons in the hidden layers. The rationale behind the choices is as follows:
+
 - Input features: 43
-- First hidden layer: 256 neurons, ReLU activation. (Increased from 80 in the initial model)
-- Second hidden layer: 128 neurons, ReLU activation. (Increased from 30 in the initial model)
-- Output layer: 1 neuron, Sigmoid activation. (Unchanged)
-- Compiled with binary crossentropy loss, Adam optimizer, and accuracy as the metric. (Unchanged)
-- The model was trained for 100 epochs with a custom callback to save the model's weights every 5 epochs. (Unchanged)
+- First hidden layer: 256 neurons, ReLU activation. The number of neurons was chosen by taking the number of input features (43), approximating a multiplier to scale this number up to the next power of 2 that is at least three times larger, resulting in 256.
+- Second hidden layer: 128 neurons, ReLU activation. Following the power of 2 rule, this layer has half the number of neurons as the first hidden layer, ensuring a gradual reduction in complexity.
+- Output layer: 1 neuron, Sigmoid activation.
+- The model was compiled with binary crossentropy loss, Adam optimizer, and accuracy as the metric.
+- Trained for 100 epochs with a custom callback to save the model's weights every 5 epochs.
 
 #### Results
 
-After training, the model achieved a loss of 0.5772 and an accuracy of 72.38% on the test data. This represents a slight decrease in performance compared to the initial model, which had a slightly lower loss of 0.5619 and a marginally higher accuracy of 72.49%. The changes in the neural network's architecture, specifically the increase in neurons in the hidden layers, did not lead to the expected improvement in model performance.
+After training, the model achieved a loss of 0.5772 and an accuracy of 72.38% on the test data. Despite the strategic increase in the network's complexity, the performance did not improve as expected, suggesting that simply increasing the number of neurons might not always result in better outcomes.
 
 ### Model 3: Optimized Neural Network II
 
 #### Model Architecture and Training
 
+Building on the previous model, this iteration introduces an additional layer while adhering to the power of 2 rule for neuron counts:
+
 - Input features: 43
-- First hidden layer: 256 neurons, ReLU activation. (Unchanged from Model 2)
-- Second hidden layer: 128 neurons, ReLU activation. (Unchanged from Model 2)
-- Third hidden layer: 64 neurons, ReLU activation. (An additional layer compared to Model 2)
-- Output layer: 1 neuron, Sigmoid activation. (Unchanged)
-- The model was compiled with binary crossentropy loss, Adam optimizer, and accuracy as the metric. (Unchanged)
-- The model was trained for 100 epochs with a custom callback to save the model's weights every 5 epochs. (Unchanged)
+- First hidden layer: 256 neurons, ReLU activation. (Chosen as three times the input features, rounded up to the nearest power of 2)
+- Second hidden layer: 128 neurons, ReLU activation. (Following the power of 2 rule)
+- Third hidden layer: 64 neurons, ReLU activation. (Continuing the power of 2 reduction for additional depth)
+- Output layer: 1 neuron, Sigmoid activation.
+- The model was compiled and trained identically to the previous models, with the hope that an additional layer would capture more complex patterns.
 
 #### Results
 
-This model iteration resulted in a loss of 0.6028 and an accuracy of 72.49% on the test data. Compared to Model 2, which had a slightly lower loss (0.5772) but the same accuracy (72.38%), adding an additional hidden layer with 64 neurons did not significantly improve performance. The slight increase in loss suggests that simply adding more layers without adjusting other parameters may not yield better results.
+This model iteration resulted in a slight increase in loss and no significant change in accuracy, suggesting that the addition of more layers, even when following a structured approach to their sizing, requires careful consideration of other factors such as overfitting and the complexity of the data.
 
 ### Model 4: Optimized Neural Network III
 
 #### Approach and Model Architecture
 
-- PCA was applied to the scaled feature data, reducing the number of input features to 32 from the original 43, while retaining approximately 98.08% of the variance in the dataset.
-- Input features after PCA: 32
-- First hidden layer: 128 neurons, ReLU activation.
-- Second hidden layer: 64 neurons, ReLU activation.
-- Third hidden layer: 32 neurons, tanh activation. (Introduced a different activation function)
+For this model, a different approach was taken by first applying PCA to reduce the dimensionality of the input features, and then designing the network layers based on the reduced feature set:
+
+- PCA reduced the input features to 32, retaining approximately 98.08% of the variance.
+- First hidden layer: 128 neurons, ReLU activation. Here, the choice of 128 neurons follows the principle of starting with a power of 2 that is close to multiplying the reduced features by 3.
+- Second hidden layer: 64 neurons, ReLU activation. Continuing with the power of 2 rule for subsequent layers.
+- Third hidden layer: 32 neurons, tanh activation. This layer uses a different activation function to introduce non-linearity and complexity.
 - Output layer: 1 neuron, Sigmoid activation.
-- The model was compiled with binary crossentropy loss, Adam optimizer, and accuracy as the metric.
-- The model was trained for 100 epochs with a custom callback to save the model's weights every 5 epochs. (Unchanged)
+- The model was trained with the same loss function, optimizer, and callbacks as the previous models.
 
 #### Results
 
-After applying PCA and reconfiguring the neural network, the model achieved a loss of 0.8329 and an accuracy of 52.97% on the test data. This represents a significant decrease in performance compared to the previous models. The results indicate that while PCA can be a powerful tool for dimensionality reduction and can help in simplifying the input data, in this case, it led to a loss of critical information necessary for the neural network to achieve high accuracy.
+The application of PCA and the subsequent network design did not yield the expected improvements, with a significant decrease in accuracy. This outcome highlights the challenge in balancing model complexity, the risk of information loss through dimensionality reduction, and the need for a nuanced approach to layer and neuron configuration.
 
 ## Conclusion
 
