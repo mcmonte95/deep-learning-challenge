@@ -73,7 +73,7 @@ Finally, the feature data was scaled using `StandardScaler` from scikit-learn. S
 - Output layer: 1 neuron, Sigmoid activation.
 - Compiled with binary crossentropy loss, Adam optimizer, and accuracy as the metric.
 - Implemented a custom callback to save model weights every 5 epochs.
-- Trained for 100 epochs, resulting in a loss of 0.5619 and an accuracy of 72.49%.
+- Trained for 100 epochs, resulting in a loss of 0.5632 and an accuracy of 72.41%.
 
 #### Results
 
@@ -94,7 +94,7 @@ The architecture for this optimized model was designed with a strategy focused o
 
 #### Results
 
-After training, the model achieved a loss of 0.5772 and an accuracy of 72.38% on the test data. Despite the strategic increase in the network's complexity, the performance did not improve as expected, suggesting that simply increasing the number of neurons might not always result in better outcomes.
+After training, the model achieved a loss of 0.5764 and an accuracy of 72.34% on the test data. Despite the strategic increase in the network's complexity, the performance did not improve as expected, suggesting that simply increasing the number of neurons might not always result in better outcomes.
 
 ### Model 3: Optimized Neural Network II
 
